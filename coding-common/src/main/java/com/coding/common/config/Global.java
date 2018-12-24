@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 全局配置类
  * 
- * @author ruoyi
+ * @author 杨佳畅
  */
 public class Global
 {
@@ -79,7 +79,7 @@ public class Global
      */
     public static String getName()
     {
-        return StringUtils.nvl(getConfig("ruoyi.name"), "RuoYi");
+        return StringUtils.nvl(getConfig("coding.name"), "Coding");
     }
 
     /**
@@ -95,7 +95,7 @@ public class Global
      */
     public static String getCopyrightYear()
     {
-        return StringUtils.nvl(getConfig("ruoyi.copyrightYear"), "2018");
+        return StringUtils.nvl(getConfig("coding.copyrightYear"), "2018");
     }
 
     /**
@@ -103,7 +103,7 @@ public class Global
      */
     public static Boolean isAddressEnabled()
     {
-        return Boolean.valueOf(getConfig("ruoyi.addressEnabled"));
+        return Boolean.valueOf(getConfig("coding.addressEnabled"));
     }
 
     /**
@@ -111,7 +111,7 @@ public class Global
      */
     public static String getProfile()
     {
-        return getConfig("ruoyi.profile");
+        return getConfig("coding.profile");
     }
 
     /**
@@ -119,7 +119,7 @@ public class Global
      */
     public static String getAvatarPath()
     {
-        return getConfig("ruoyi.profile") + "avatar/";
+        return getConfig("coding.profile") + "avatar/";
     }
 
     /**
@@ -127,7 +127,7 @@ public class Global
      */
     public static String getDownloadPath()
     {
-        return getConfig("ruoyi.profile") + "download/";
+        return getConfig("coding.profile") + "download/";
     }
 
     /**
@@ -135,7 +135,7 @@ public class Global
      */
     public static String getAuthor()
     {
-        return StringUtils.nvl(getConfig("gen.author"), "ruoyi");
+        return StringUtils.nvl(getConfig("gen.author"), "coding");
     }
 
     /**
@@ -143,7 +143,7 @@ public class Global
      */
     public static String getPackageName()
     {
-        return StringUtils.nvl(getConfig("gen.packageName"), "com.ruoyi.project.module");
+        return StringUtils.nvl(getConfig("gen.packageName"), "com.coding.project.module");
     }
 
     /**

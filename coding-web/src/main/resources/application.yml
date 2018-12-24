@@ -1,15 +1,15 @@
 # 项目相关配置
-coding:
-  # 名称
-  name: Coding
-  # 版本
-  version: 1.0
-  # 版权年份
-  copyrightYear: 2018
-  # 文件上传路径
-  profile: /Users/mac/Downloads/upload
-  # 获取ip地址开关
-  addressEnabled: true
+#coding:
+#  # 名称
+#  name: Coding
+#  # 版本
+#  version: 1.0
+#  # 版权年份
+#  copyrightYear: 2018
+#  # 文件上传路径
+#  profile: /Users/mac/Downloads/upload
+#  # 获取ip地址开关
+#  addressEnabled: true
 
 # 开发环境配置
 server:
@@ -18,6 +18,9 @@ server:
   servlet:
     # 项目contextPath
     context-path: /
+    session:
+        # session超时时间，单位为秒
+        timeout: 3600
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
@@ -67,6 +70,25 @@ spring:
       # 热部署开关
       enabled: true
 
+  # redis配置，默认没有密码
+  redis:
+    host: 140.143.61.178
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 3000
+
+  # session 存储到 redis，实现分布式 session
+  session:
+    store-type: redis
+    redis:
+      namespace: coding:spring:session
+
 # MyBatis
 mybatis:
     # 搜索指定包别名
@@ -102,3 +124,29 @@ gen:
   autoRemovePre: true
   # 表前缀(类名不会包含表前缀)
   tablePrefix: sys_
+
+# 自定义配置
+coding:
+  security:
+    # 登录页面自定义地址
+    userLoginPage: /user/login
+    adminLoginPage: /admin/login
+    code:
+      # 图形验证码相关配置
+      image:
+        # 图形验证码由字符位数
+        length: 4
+        # 图形验证码图片长度，单位 px
+        width: 100
+        # 图形验证码高度，单位 px
+        height: 33
+        # 图形验证码失效时间
+        expire-in: 300
+        # 生成图形验证码的请求 url
+        create-url: /image/code
+        # 对应图形验证码登录页面 form表单的 action属性
+        login-processing-url: /authentication/form
+      sms:
+        # 短信验证码失效时间5分钟
+        expire-in: 300
+        login-processing-url: /mobile/login

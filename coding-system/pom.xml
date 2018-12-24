@@ -12,12 +12,14 @@
     <description>system系统模块</description>
 
     <dependencies>
+
         <!--通用工具-->
         <dependency>
             <groupId>com.coding</groupId>
             <artifactId>coding-common</artifactId>
             <version>${coding.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

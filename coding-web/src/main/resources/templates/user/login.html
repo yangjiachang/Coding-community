@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Coding论坛登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="coding,java社区">
+    <meta name="description" content="Coding论坛是以java开发为中心的社区论坛，致力于为web开发提供强劲动力">
+    <link rel="stylesheet" th:href="@{/css/layui/css/layui.css}" />
+    <link rel="stylesheet" th:href="@{/css/layui/global.css}" />
+</head>
+<body>
+<div data-th-include="common/header"></div>
+<div class="layui-container fly-marginTop">
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title">
+                <li class="layui-this">登录</li>
+                <li><a th:href="@{/sms/login}">短信登录</a></li>
+                <li><a th:href="@{/user/register}">注册</a></li>
+            </ul>
+            <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form layui-form-pane"  id="l-login">
+                        <form action="#" method="post" onsubmit="return false">
+                            <div class="layui-form-item">
+                                <label for="L_email" class="layui-form-label">用户名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_email" name="username" lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_pass" class="layui-form-label">密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" id="L_pass" name="password" lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_vercode" class="layui-form-label">验证码</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_vercode" name="imageCode" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid" style="padding: 0!important;">
+                                    <a href="#">
+                                        <img th:src="@{/code/image}" alt="图形验证码" onclick="reloadCode()" id="validateCodeImg" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn" lay-filter="*" onclick="formLogin()">立即登录</button>
+                                <span style="padding-left:20px;">
+                                    <a href="forget.html">忘记密码？</a>
+                                </span>
+                            </div>
+                            <div class="layui-form-item fly-form-app">
+                                <span>或者使用社交账号登入</span>
+                                <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-th-include="common/footer"></div>
+
+
+<script>
+    function reloadCode() {
+        $("#validateCodeImg").attr("src", "/code/image?data=" + new Date() + "");
+    }
+    function formLogin() {
+        var username = $("#l-login input[name='username']").val().trim();
+        var password = $("#l-login input[name='password']").val().trim();
+        var imageCode = $("#l-login input[name='imageCode']").val().trim();
+        var $form = $("#l-login").find("form");
+        console.log($form.serialize());
+        if (username === "") {
+            layer.msg("请输入账号！");
+            return;
+        }
+        if (password === "") {
+            layer.msg("请输入密码！");
+            return;
+        }
+
+        if (imageCode === "") {
+            layer.msg("请输入验证码！");
+            return;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/form/login",
+            data: $form.serialize(),
+            dataType: "json",
+            success: function (r) {
+                console.log(r);
+                if (r.code === 0) {
+                    $form[0].reset();
+                    layer.msg("登录成功");
+                    location.href = '/index';
+                } else {
+                    if (r.msg !== 'IMAGE验证码的值不能为空') reloadCode();
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

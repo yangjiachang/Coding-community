@@ -1,16 +1,18 @@
 package com.coding.common.utils;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 时间工具类
  * 
- * @author ruoyi
+ * @author 杨佳畅
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {
@@ -153,4 +155,5 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
     }
+
 }

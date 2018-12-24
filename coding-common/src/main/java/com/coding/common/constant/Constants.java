@@ -3,7 +3,7 @@ package com.coding.common.constant;
 /**
  * 通用常量信息
  * 
- * @author ruoyi
+ * @author 杨佳畅
  */
 public class Constants
 {
